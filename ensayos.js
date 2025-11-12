@@ -1,39 +1,34 @@
 let ausentes = [];
-let cursoActual = null; // Guardamos el curso actual
+let cursoActual = null;
 
-// 🎓 Todos los cursos con su código y lista de estudiantes
 const cursos = {
-  "Danna1234": {
-    nombre: "5to Secundaria",
+  "Primero1234": {
+    nombre: "1ro Secundaria",
     estudiantes: [
-      "ALVARADO CARVAJAL ALEXIS SANTIAGO",
-      "ARTEAGA APAZA VIANCA ANALIA",
-      "CASTILLO FLORES YAMIL DEYMAR",
-      "CHAMBI GUTIERREZ ANGEL",
-      "CHOQUETARQUI ERGUETA MAYRA DANETZA",
-      "ESPEJO CHAVEZ YHENY KEILA",
-      "HUALLPARA CRUZ FERNANDO ISRAEL",
-      "LOPEZ CACHI ANELIZ",
-      "LUCANA LLANQUECHOQUE DIEGO LEONEL",
-      "MENDOZA AMORAGA NATALIA LILIANA",
-      "PAUCARA MAMANI ISRAEL",
-      "QUISPE LIMACHI ELVIS PABLO",
-      "QUISPE MAMANI MARIANA",
-      "QUISPE QUISPE DANER",
-      "QUISPE POMA DANNA MARICELA",
-      "QUISPE PAUCARA CLIVER ADEMAR",
-      "RAMOS PAUCARA DELIA JHOSELIN",
-      "REYES RIVEROS MUKTI RAMIRO",
-      "SOLAR ALBA DEIVIS ALEXANDER",
-      "SUXO CACERES ANA CAROLINA",
-      "VALVERDE SANCHEZ NATALIA",
-      "VARGAS ROJAS SHARIE MILAGROS",
-      "VELASCO ULO JAZMINE ABIGAIL",
-      "YARARI QUISPE ARIEL WILSON",
-      "FERRANO MOLLO EDSON DIEGO"
+      "ALANOCA RIOS YESICA VALENTINA",
+      "AYALA RODRIGUEZ AIRAN JUAN",
+      "BALDELLON LAURA VALENTINA",
+      "CALLIZAYA PAUCARA ALISON MAYTE",
+      "CEREZO ADUVIRI SEBASTIAN DAVIDE",
+      "CEREZO ADUVIRI GIORGIO MORIS",
+      "CHAMBI GUTIERREZ FABIAN",
+      "CHAVEZ LIMACHI SARA SCARLETT",
+      "FLORES LOZA SALVADOR DEIVID",
+      "LUNA MERLO LEONEL ALEXANDER",
+      "MAMANI MENDOZA NAIZETH AYLIN",
+      "MAMANI HUANCA YOSIMAR JHOEL",
+      "MAMANI QUISPE DENIS",
+      "MAMANI MARIN JHAEMY MARBEL",
+      "MAMANI APAZA YERCO JHOEL",
+      "MARAZA ESPEJO DANIEL",
+      "PEREZ GUTIERREZ JOHAN ERLAN",
+      "QUISPE CARRILLO ARACELI BRIANCA",
+      "QUISPE MAMANI CRISTIAN KEVIN",
+      "QUISPE AMARU LIZETH LUNA",
+      "ZACARIAS YUJRA DAVID"
     ]
   },
-  "Carlos123": {
+  "Luz123": {
     nombre: "3ro Secundaria",
     estudiantes: [
       "MENDOZA MARCO ANTONIO",
@@ -68,12 +63,34 @@ const cursos = {
       "VALVERDE SANCHEZ VICTOR FERNANDO"
     ]
   },
-  "Ana123": {
-    nombre: "4to Secundaria",
+  "Danna12345": {
+    nombre: "5to Secundaria",
     estudiantes: [
-      "Ejemplo Estudiante 1",
-      "Ejemplo Estudiante 2",
-      "Ejemplo Estudiante 3"
+      "ALVARADO CARVAJAL ALEXIS SANTIAGO",
+      "ARTEAGA APAZA VIANCA ANALIA",
+      "CASTILLO FLORES YAMIL DEYMAR",
+      "CHAMBI GUTIERREZ ANGEL",
+      "CHOQUETARQUI ERGUETA MAYRA DANETZA",
+      "ESPEJO CHAVEZ YHENY KEILA",
+      "HUALLPARA CRUZ FERNANDO ISRAEL",
+      "LOPEZ CACHI ANELIZ",
+      "LUCANA LLANQUECHOQUE DIEGO LEONEL",
+      "MENDOZA AMORAGA NATALIA LILIANA",
+      "PAUCARA MAMANI ISRAEL",
+      "QUISPE LIMACHI ELVIS PABLO",
+      "QUISPE MAMANI MARIANA",
+      "QUISPE QUISPE DANER",
+      "QUISPE POMA DANNA MARICELA",
+      "QUISPE PAUCARA CLIVER ADEMAR",
+      "RAMOS PAUCARA DELIA JHOSELIN",
+      "REYES RIVEROS MUKTI RAMIRO",
+      "SOLAR ALBA DEIVIS ALEXANDER",
+      "SUXO CACERES ANA CAROLINA",
+      "VALVERDE SANCHEZ NATALIA",
+      "VARGAS ROJAS SHARIE MILAGROS",
+      "VELASCO ULO JAZMINE ABIGAIL",
+      "YARARI QUISPE ARIEL WILSON",
+      "FERRANO MOLLO EDSON DIEGO"
     ]
   }
 };
@@ -87,17 +104,18 @@ function verificarCodigo() {
     cursoActual = cursos[codigo];
     document.getElementById("loginSection").classList.add("hidden");
     document.getElementById("formSection").classList.remove("hidden");
+    document.getElementById("tituloCurso").textContent = `Ensayo de Danza - ${cursoActual.nombre}`;
     generarLista();
   } else {
     error.textContent = "Código incorrecto. Intente nuevamente.";
   }
 }
 
-// 🧾 Genera la lista de estudiantes según el curso
+// 🧾 Generar lista
 function generarLista() {
   const lista = document.getElementById("listaEstudiantes");
-  lista.innerHTML = ""; // Limpiar lista anterior
-  ausentes = []; // Reiniciar ausentes
+  lista.innerHTML = "";
+  ausentes = [];
 
   cursoActual.estudiantes.forEach(nombre => {
     const label = document.createElement("label");
@@ -110,114 +128,72 @@ function generarLista() {
   });
 }
 
-// ➕ Agregar seleccionados a la lista de ausentes
 function agregarSeleccionados() {
   const seleccionados = Array.from(document.querySelectorAll("#listaEstudiantes input:checked"))
     .map(chk => chk.value);
-
   seleccionados.forEach(nombre => {
     if (!ausentes.includes(nombre)) ausentes.push(nombre);
   });
-
-  // Desmarcar todos los checks
   document.querySelectorAll("#listaEstudiantes input").forEach(chk => chk.checked = false);
   mostrarAusentes();
 }
 
-// 📋 Mostrar ausentes en pantalla
 function mostrarAusentes() {
   const contenedor = document.getElementById("resultado");
   contenedor.innerHTML = "<h3>Ausentes Registrados:</h3>";
-
   if (ausentes.length === 0) {
     contenedor.innerHTML += "<p>No hay estudiantes ausentes.</p>";
     return;
   }
-
   ausentes.forEach((nombre, index) => {
     const div = document.createElement("div");
     div.className = "ausente-item";
-    div.innerHTML = `
-      <span>${nombre}</span>
-      <button onclick="eliminarAusente(${index})">❌ Eliminar</button>
-    `;
+    div.innerHTML = `<span>${nombre}</span><button onclick="eliminarAusente(${index})">❌</button>`;
     contenedor.appendChild(div);
   });
 }
 
-// ❌ Eliminar un ausente
-function eliminarAusente(indice) {
-  ausentes.splice(indice, 1);
+function eliminarAusente(i) {
+  ausentes.splice(i, 1);
   mostrarAusentes();
 }
 
-// 💾 Guardar en PDF
 function guardarPDF() {
-  if (ausentes.length === 0) {
-    alert("No hay ausentes para guardar.");
-    return;
-  }
+  if (ausentes.length === 0) return alert("No hay ausentes para guardar.");
 
   const fecha = new Date();
-  const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+  const fechaFormateada = fecha.toLocaleDateString('es-BO', { year: 'numeric', month: 'long', day: 'numeric' });
   const hora = fecha.toLocaleTimeString();
-  const fechaFormateada = fecha.toLocaleDateString('es-BO', opciones);
-
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
   doc.setFontSize(14);
-  doc.text(`Registro de Ensayo de Danza - ${cursoActual.nombre}`, 10, 15);
-
+  doc.text(`Ensayo de Danza - ${cursoActual.nombre}`, 10, 15);
   doc.setFontSize(11);
-  doc.text(`Fecha: ${fechaFormateada}`, 10, 25);
-  doc.text(`Hora: ${hora}`, 150, 25);
-
+  doc.text(`Fecha: ${fechaFormateada} | Hora: ${hora}`, 10, 25);
   doc.setFontSize(12);
-  doc.text("Estudiantes ausentes:", 10, 35);
+  doc.text("Estudiantes Ausentes:", 10, 35);
 
-  ausentes.forEach((nombre, i) => {
-    const y = 45 + i * 8;
-    if (y > 270) {
-      doc.addPage();
-      doc.setFontSize(12);
-      doc.text("Continuación de lista de ausentes:", 10, 15);
-    }
-    doc.text(`${i + 1}. ${nombre}`, 10, y);
-  });
-
+  ausentes.forEach((n, i) => doc.text(`${i + 1}. ${n}`, 10, 45 + i * 8));
   doc.save(`Ausentes_${cursoActual.nombre}_${fechaFormateada.replace(/\s/g, "_")}.pdf`);
 }
 
-// 🚪 Salir del formulario
 function salir() {
-  if (confirm("¿Desea salir del formulario?")) {
-    location.reload();
-  }
+  if (confirm("¿Desea salir del formulario?")) location.reload();
 }
 
-// 👁️ Mostrar/Ocultar contraseña
 function togglePassword() {
   const input = document.getElementById("codigoInput");
   const icon = document.querySelector(".toggle-password");
-
-  if (input.type === "password") {
-    input.type = "text";
-    icon.textContent = "🙈";
-  } else {
-    input.type = "password";
-    icon.textContent = "👁️";
-  }
+  if (input.type === "password") { input.type = "text"; icon.textContent = "🙈"; }
+  else { input.type = "password"; icon.textContent = "👁️"; }
 }
 
-// Seleccionamos todos los botones con la clase
-const themeButtons = document.querySelectorAll(".toggleThemeBtn");
-
-themeButtons.forEach(btn => {
+// 🌙 Modo oscuro
+document.querySelectorAll(".toggleThemeBtn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
-    // Cambiamos el texto de todos los botones
     const modo = document.body.classList.contains("dark-mode") ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
-    themeButtons.forEach(b => b.textContent = modo);
+    document.querySelectorAll(".toggleThemeBtn").forEach(b => b.textContent = modo);
   });
 });
