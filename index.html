@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Control de Ensayo de Danza - 2do Secundaria</title>
+  <title>Control de Ensayo de Danza - Educación Musical</title>
   <link rel="stylesheet" href="estilo.css">
   <!-- Librería para generar PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -14,7 +14,7 @@
 
     <button class="toggleThemeBtn">🌙 Cambiar Modo</button>
 
-    <div id="loginSection" class="login-container">
+    <div id="loginBox" class="login-container">
         <header class="login-header">
           <h1>UNIDAD EDUCATIVA T.H.P. "JUPAPINA"</h1>
           <h2>CONTROL DE ASISTENCIA - ENSAYOS DE DANZA</h2>
@@ -32,11 +32,15 @@
           <p id="mensajeError" class="error"></p>
         </div>
       </div>      
+  </div>
 
   <!-- FORMULARIO PRINCIPAL -->
   <div class="container hidden" id="formSection">
     <button class="toggleThemeBtn">🌙 Cambiar Modo</button>
-    <h2>Control de Ensayo de Danza</h2>
+    
+    <!-- TITULO DEL CURSO -->
+    <h2 id="tituloCurso"></h2>
+    
     <p>Seleccione los estudiantes que <strong>NO asistieron</strong> al ensayo:</p>
     <form id="asistenciaForm">
       <div id="listaEstudiantes"></div>
@@ -48,19 +52,18 @@
     <button id="guardarPDF">💾 Guardar PDF</button>
     <button id="salir">🚪 Salir</button>
     
-    <script src="ensayos.js"></script>
-    <script>
-      // Asociamos los botones a sus funciones
-      document.getElementById("guardarPDF").addEventListener("click", guardarPDF);
-      document.getElementById("salir").addEventListener("click", salir);
-    </script>
-    
-      
-      <!-- 🔗 Nota con enlace de WhatsApp -->
-      <p class="nota-whatsapp">
-        📝 <strong>Nota:</strong> Una vez guardado el PDF, envíalo al siguiente enlace 👉 
-        <a href="https://wa.link/05v12w" target="_blank">Enviar por WhatsApp</a>
-      </p>
+    <!-- 🔗 Nota con enlace de WhatsApp -->
+    <p class="nota-whatsapp">
+      📝 <strong>Nota:</strong> Una vez guardado el PDF, envíalo al siguiente enlace 👉 
+      <a href="https://wa.link/05v12w" target="_blank">Enviar por WhatsApp</a>
+    </p>
+  </div>
 
+  <script src="ensayos.js"></script>
+  <script>
+    // Asociamos los botones a sus funciones
+    document.getElementById("guardarPDF").addEventListener("click", guardarPDF);
+    document.getElementById("salir").addEventListener("click", salir);
+  </script>
 </body>
 </html>
