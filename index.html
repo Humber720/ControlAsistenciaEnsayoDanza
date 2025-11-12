@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Ensayo de Danza - 2do Secundaria</title>
+  <link rel="stylesheet" href="estilo.css">
+  <!-- Librería para generar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="container" id="loginSection">
+
+    <button class="toggleThemeBtn">🌙 Cambiar Modo</button>
+
+    <div id="loginSection" class="login-container">
+        <header class="login-header">
+          <h1>UNIDAD EDUCATIVA T.H.P. "JUPAPINA"</h1>
+          <h2>CONTROL DE ASISTENCIA - ENSAYOS DE DANZA</h2>
+          <h3>Área: Educación Musical</h3>
+          <p class="profesor">Docente: Prof. Humberto Yupanqui C.</p>
+        </header>
+      
+        <div class="login-box">
+          <h4>🔐 Ingreso al formulario</h4>
+          <div class="input-group">
+            <input type="password" id="codigoInput" placeholder="Ingrese el código de acceso">
+            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+          </div>
+          <button class="btn-ingresar" onclick="verificarCodigo()">Ingresar</button>
+          <p id="mensajeError" class="error"></p>
+        </div>
+      </div>      
+
+  <!-- FORMULARIO PRINCIPAL -->
+  <div class="container hidden" id="formSection">
+    <button class="toggleThemeBtn">🌙 Cambiar Modo</button>
+    <h2>Control de Ensayo de Danza</h2>
+    <p>Seleccione los estudiantes que <strong>NO asistieron</strong> al ensayo:</p>
+    <form id="asistenciaForm">
+      <div id="listaEstudiantes"></div>
+      <button type="button" onclick="agregarSeleccionados()">➕ Agregar Ausentes</button>
+    </form>
+
+    <div id="resultado" class="resultado-container"></div>
+
+    <button id="guardarPDF">💾 Guardar PDF</button>
+    <button id="salir">🚪 Salir</button>
+    
+    <script src="ensayos.js"></script>
+    <script>
+      // Asociamos los botones a sus funciones
+      document.getElementById("guardarPDF").addEventListener("click", guardarPDF);
+      document.getElementById("salir").addEventListener("click", salir);
+    </script>
+    
+      
+      <!-- 🔗 Nota con enlace de WhatsApp -->
+      <p class="nota-whatsapp">
+        📝 <strong>Nota:</strong> Una vez guardado el PDF, envíalo al siguiente enlace 👉 
+        <a href="https://wa.link/05v12w" target="_blank">Enviar por WhatsApp</a>
+      </p>
+
+</body>
+</html>
